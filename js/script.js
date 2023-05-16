@@ -20,6 +20,7 @@ pageArray.forEach(i => {
     const pageInput = document.createElement("input");
     pageInput.type = "button";
     pageInput.value = i;
+    pageInput.className = "page-button";
     pageInput.addEventListener('click', (event) => clickPageButton(event));
     pageInput.disabled = (i === 1);
     paginationDiv.appendChild(pageInput);
