@@ -20,7 +20,7 @@ pageArray.forEach(i => {
     const pageInput = document.createElement("input");
     pageInput.type = "button";
     pageInput.value = i;
-    pageInput.className = "page-button";
+    pageInput.className = (i === 1) ? "" : "page-button";
     pageInput.addEventListener('click', (event) => clickPageButton(event));
     pageInput.disabled = (i === 1);
     paginationDiv.appendChild(pageInput);
@@ -29,9 +29,11 @@ pageArray.forEach(i => {
 function clickPageButton(event){
     Array.from(paginationDiv.children).forEach(pageInput => {
         pageInput.disabled = false;
+        pageInput.className = "page-button";
     })
     const input = event.target;
     const value = input.value;
+    input.className = "";
     input.disabled = true;
     loadAPage(value);
 }
