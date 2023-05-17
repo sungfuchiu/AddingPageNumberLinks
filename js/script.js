@@ -4,14 +4,14 @@ const numberOfPages = Math.ceil(users.length/pageSize);
 const pageArray = [...Array(numberOfPages).keys()].map(i => i+1);
 const contactListDiv = document.getElementById("contact-list");
 const contactNumber = document.getElementById("contact-number");
-let contactTemplate = `
+const contactTemplate = (imageURL, name, emailUsername, joinDate) => `
 <div class="contact-details">
-    <img class="avatar" src="{@imageURL}">
-    <h3>{@name}</h3>
-    <span class="email">{@emailUsername}@example.com</span>
+    <img class="avatar" src="${imageURL}">
+    <h3>${name}</h3>
+    <span class="email">${emailUsername}@example.com</span>
 </div>
 <div class="joined-details">
-       <span class="date">Joined {@joinDate}</span>
+       <span class="date">Joined ${joinDate}</span>
 </div>`;
 
 contactNumber.innerText = users.length;
@@ -45,11 +45,12 @@ function loadAPage(pageNumber = 1){
         if(i >= users.length){
             return;
         }
-        let contactHTML = contactTemplate.replace("{@imageURL}", users[i].image);
-        contactHTML = contactHTML.replace("{@name}", users[i].name);
-        contactHTML = contactHTML.replace("{@joinDate}", users[i].joined);
-        contactHTML = contactHTML.replace("{@emailUsername}", users[i].name.split(" ").join("."));
-        
+        let contactHTML = contactTemplate(users[i].image, 
+                                            users[i].name,
+                                            users[i].name.split(" ").join("."),
+                                            
+                                            users[i].joined);
+
         const userLi = document.createElement("li");
         userLi.className = "contact-item cf";
         userLi.innerHTML = contactHTML;
